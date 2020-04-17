@@ -111,7 +111,7 @@ image_pull() {
 
 container_create() {
     if ! ${SUDO} podman create \
-                 --hostname toolbox \
+                 --hostname $TOOLBOX_HOSTNAME \
                  --name "$TOOLBOX_NAME" \
                  --network host \
                  --privileged \
@@ -204,6 +204,7 @@ main() {
                 ;;
             -t|--tag)
                 TOOLBOX_NAME="${TOOLBOX_NAME}-$2"
+		TOOLBOX_HOSTNAME="toolbox-$2"
                 shift 2
                 ;;
             --)
